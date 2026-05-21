@@ -82,6 +82,30 @@
       text-align: justify;
     }
 
+    #abstract h2,
+    #method h2 {
+      border-bottom: 0;
+      font-size: 28px;
+      text-align: center;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    .method-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+      text-align: justify;
+    }
+
     pre {
       margin: 0;
       padding: 14px;
@@ -142,6 +166,25 @@
       <p>
         In this paper, we introduce a model of evolution and learning in robots that co-optimizes a distribution of latent design vectors (genotypes) and a mixture of control experts (neural modules), which are gated by the latent coordinates of each decoded design (phenotype). This provides a scalable alternative to co-design algorithms that either train an individual policy for every robot, which is inefficient, or a monolithic universal controller for all robots, which results in overly conservative structures and behaviors. Our approach lies somewhere between these two extremes, preserving ancestral knowledge in a unified yet modular framework in which different body plans activate and deactivate different combinations of learned sensorimotor circuits for goal-directed behavior. This allows one part of the controller to be overhauled to better suit new species of designs as they emerge without disrupting the hard-earned knowledge contained within other expert modules. It also allows pretrained expert policies to be directly plugged into the mixture, which can steer evolution into otherwise unexplored areas of latent space containing desired morphological traits. We refer to this process as "evo by demo" and explore how it may be used to guide freeform evolution toward canonical structures defined by the pretrained model.
       </p>
+    </section>
+
+    <section id="method">
+      <h2>Method</h2>
+      <figure class="method-figure">
+        <img src="figs/method/fig_moe_overview.png" alt="Overview of the ECo-MoE method">
+        <figcaption>
+          <strong>Embodiment-conditioned mixture of experts.</strong> Designs were sampled from an evolving
+          distribution within a latent space of possible genotypes (<strong>A</strong> and <strong>B</strong>).
+          The distribution was initialized randomly for the main experiment (blue region in B); for "evo by demo",
+          it was regularized by a predesigned demo (orange region in B). The latent genotype of each endoskeletal
+          phenotype (<strong>C</strong> and <strong>D</strong>) was fed as input to a gating network that produces
+          a weighted policy output &pi;(a<sub>t</sub> | s<sub>t</sub>, z) by mixing expert actions
+          (<strong>E</strong>). In evo-by-demo, a policy was pretrained for the predesigned demo and injected as a
+          frozen expert into the mixture. Designs with latent genes similar to the predefined species were routed
+          with greater weight to the pretrained expert (orange bar in D), steering evolution toward the desired
+          phenotypic traits.
+        </figcaption>
+      </figure>
     </section>
 
     <section id="citation">
