@@ -83,7 +83,8 @@
     }
 
     #abstract h2,
-    #method h2 {
+    #method h2,
+    #results h2 {
       border-bottom: 0;
       font-size: 28px;
       text-align: center;
@@ -93,7 +94,12 @@
       margin: 0;
     }
 
-    .method-figure img {
+    .results-figure + .results-figure {
+      margin-top: 28px;
+    }
+
+    .method-figure img,
+    .results-figure img {
       display: block;
       width: 100%;
       height: auto;
@@ -183,6 +189,62 @@
           frozen expert into the mixture. Designs with latent genes similar to the predefined species were routed
           with greater weight to the pretrained expert (orange bar in D), steering evolution toward the desired
           phenotypic traits.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="results">
+      <h2>Results</h2>
+      <figure class="results-figure">
+        <img src="figs/results/fig_moe_results.png" alt="ECo-MoE results across task environments">
+        <figcaption>
+          <strong>Task environments.</strong> We considered three task environments: Flat Ground
+          (<strong>A</strong>), Upright Locomotion (on flat ground; <strong>B</strong>), and Potholes
+          (<strong>C</strong>). In each one, five independent evolutionary trials were conducted, and the peak
+          fitness achieved by each design was averaged across the population before plotting the cumulative max
+          (higher is better; <strong>D-F</strong>). Evolution with an ECo-MoE controller (blue curves) is compared
+          against evolution with the non-modular (single expert) baseline controller (red); shaded regions indicate
+          95% bootstrapped confidence intervals. In all three environments net displacement is rewarded. Upright
+          Locomotion adds a second component to the reward function that tracks the proportion of body voxels that
+          fall below a prespecified height threshold during behavior. These results show that, although ECo-MoE
+          fell into the same local optimum as the Baseline on Flat Ground, it significantly increased the
+          evolvability of Upright Locomotion as well as locomotion across Potholes.
+        </figcaption>
+      </figure>
+      <figure class="results-figure">
+        <img src="figs/results/fig_robot_population.png" alt="Top robot designs across evolutionary time">
+        <figcaption>
+          <strong>Top five designs at different points in evolutionary time.</strong> The best designs from a
+          randomly initialized population (<strong>A-E</strong>), early (<strong>F-J</strong>) and late
+          (<strong>K-O</strong>) in evolution, and from the final population (<strong>P-T</strong>) are shown for a
+          representative Upright Locomotion trial. Each body plan contains an internal jointed skeleton
+          (multicolored segments) surrounded by soft tissue (magenta line). In the top right hand corner of each
+          design panel, an inset bar plot shows how weight was routed across the four experts (blue rectangles) to
+          control the given body, with taller and shorter bars corresponding to more and less weight, respectively.
+          Below each design, part of the genotype (every 16th element of the vector) is visualized by upward
+          (dark pink) and downward (light pink) bars representing positive and negative values, respectively, and
+          with bar length proportional to the absolute value of the component.
+        </figcaption>
+      </figure>
+      <figure class="results-figure">
+        <img src="figs/results/fig_evo_by_demo.png" alt="Evo-by-demo results and evolved morphologies">
+        <figcaption>
+          <strong>Evo by demo.</strong> A predesigned body plan (the demo; <strong>A</strong>) and its pretrained
+          expert policy were used to initialize and guide evolution toward morphologies with similar phenotypic
+          traits. A representative evolved morphology is shown for each of the three tested variants of evo-by-demo:
+          without a predesigned latent initialization (<strong>B</strong>; PretrainOnly), without a frozen
+          pretrained expert (<strong>D</strong>; PredesignOnly), and with both predesigning and pretraining
+          (<strong>D</strong>; CoSteering). Five independent evolutionary trials of each variant were conducted for
+          Upright Locomotion and compared against each other as well as the basic, randomly initialized ECo-MoE and
+          its non-modular baseline. Two morphological metrics were used to track evolution relative to the demo: the
+          effective-limb-count (<strong>E</strong>) and the mass-bias-vector-magnitude, which quantifies asymmetry
+          in the robot's mass distribution relative to its root segment (<strong>F</strong>). Fitness was also
+          tracked (<strong>G</strong>). Under the tested conditions, CoSteering (purple lines in E-G) was the most
+          effective way to guide evolution toward the demo's radially symmetrical quadrupedal form (orange dashed
+          lines in E and F), but the highest fitness was achieved without pretraining (yellow line in G;
+          PredesignOnly). Overall we see that a good demo, such as this one, can significantly increase the fitness
+          of evolved designs, but only if initialized about the predesigned latent (G). Shaded regions indicate 95%
+          bootstrapped confidence intervals of the mean.
         </figcaption>
       </figure>
     </section>
