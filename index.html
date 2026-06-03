@@ -31,6 +31,7 @@
       font-size: 34px;
       line-height: 1.2;
       font-weight: 600;
+      overflow-wrap: anywhere;
     }
 
     .venue {
@@ -41,6 +42,7 @@
     .authors {
       margin: 0 0 8px;
       font-size: 18px;
+      overflow-wrap: anywhere;
     }
 
     .affiliation {
@@ -103,6 +105,91 @@
     .tldr {
       margin: 0 0 28px;
       font-size: 18px;
+      text-align: center;
+    }
+
+    .project-videos {
+      width: min(1760px, calc(100vw - 16px));
+      margin: 34px 0 42px 50%;
+      transform: translateX(-50%);
+    }
+
+    .project-videos h2 {
+      margin: 0 0 24px;
+      padding-bottom: 0;
+      border-bottom: 0;
+      font-size: 28px;
+      line-height: 1.25;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .project-videos h2 + .video-row {
+      margin-top: 0;
+    }
+
+    .video-row + h2 {
+      margin-top: 38px;
+    }
+
+    .video-row {
+      display: grid;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 18px;
+    }
+
+    .video-row.three-up {
+      grid-template-columns: repeat(3, max-content);
+    }
+
+    .video-row.two-up {
+      grid-template-columns: repeat(2, max-content);
+      margin-bottom: 38px;
+    }
+
+    .video-pair {
+      margin: 0;
+      text-align: center;
+    }
+
+    .media-pair {
+      --media-gap: 8px;
+      --media-height: clamp(118px, 11.6vw, 200px);
+      --video-width: clamp(210px, 20.622vw, 356px);
+      display: grid;
+      grid-template-columns: var(--video-width) var(--media-height);
+      align-items: stretch;
+      gap: var(--media-gap);
+      width: max-content;
+      max-width: 100%;
+      height: var(--media-height);
+    }
+
+    .media-pair video,
+    .media-pair img {
+      display: block;
+      width: 100%;
+      height: var(--media-height);
+      min-height: var(--media-height);
+      max-height: var(--media-height);
+      object-fit: contain;
+    }
+
+    .media-pair video {
+      min-width: 0;
+    }
+
+    .media-pair img {
+      min-width: var(--media-height);
+      max-width: var(--media-height);
+    }
+
+    .video-pair figcaption {
+      margin-top: 10px;
+      font-size: 19px;
+      line-height: 1.35;
+      font-weight: 600;
       text-align: center;
     }
 
@@ -175,6 +262,55 @@
       .links {
         font-size: 16px;
       }
+
+      .project-videos {
+        width: calc(100vw - 36px);
+        margin-top: 30px;
+        margin-bottom: 36px;
+      }
+
+      .project-videos h2 {
+        font-size: 24px;
+        margin-bottom: 18px;
+      }
+
+      .video-row,
+      .video-row.three-up,
+      .video-row.two-up {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+      }
+
+      .video-row.two-up {
+        margin-bottom: 32px;
+      }
+
+      .media-pair {
+        --media-height: auto;
+        display: flex;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .media-pair video {
+        width: 100%;
+        max-width: 100%;
+        min-height: 0;
+        height: auto;
+        max-height: none;
+        flex: 0 1 auto;
+      }
+
+      .media-pair img {
+        width: min(180px, 56vw);
+        min-width: 0;
+        max-width: min(180px, 56vw);
+        min-height: 0;
+        height: auto;
+        max-height: none;
+        flex: 0 1 auto;
+      }
     }
   </style>
 </head>
@@ -205,6 +341,109 @@
       <strong>TL;DR:</strong> We introduce a novel abstraction and operationalization of evolution that
       co-optimizes latent-gated mixtures of experts and designs.
     </p>
+
+    <section class="project-videos" aria-label="Project videos">
+      <h2>Evo on Locomotion Tasks</h2>
+      <div class="video-row three-up">
+        <figure class="video-pair">
+          <div class="media-pair">
+            <video
+              src="videos/evo_locomotion/flat_ground/gen_120_epoch_600_robot_64_rank_1_disp_1.353_run_1.mp4"
+              controls
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="metadata"
+            ></video>
+            <img
+              src="videos/evo_locomotion/flat_ground/gen_120_epoch_600_robot_64_rank_1_disp_1.353_run_1.png"
+              alt="Evolved robot for the Flat Ground task"
+            >
+          </div>
+          <figcaption>Flat Ground</figcaption>
+        </figure>
+
+        <figure class="video-pair">
+          <div class="media-pair">
+            <video
+              src="videos/evo_locomotion/upright_locomotion/gen_120_epoch_600_robot_2_rank_2_disp_1.703_run_5.mp4"
+              controls
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="metadata"
+            ></video>
+            <img
+              src="videos/evo_locomotion/upright_locomotion/gen_120_epoch_600_robot_2_rank_2_disp_1.703_run_5.png"
+              alt="Evolved robot for the Upright Locomotion task"
+            >
+          </div>
+          <figcaption>Upright Locomotion</figcaption>
+        </figure>
+
+        <figure class="video-pair">
+          <div class="media-pair">
+            <video
+              src="videos/evo_locomotion/potholes/gen_120_epoch_600_robot_29_rank_18_disp_0.464_run_2.mp4"
+              controls
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="metadata"
+            ></video>
+            <img
+              src="videos/evo_locomotion/potholes/gen_120_epoch_600_robot_29_rank_18_disp_0.464_run_2.png"
+              alt="Evolved robot for the Potholes task"
+            >
+          </div>
+          <figcaption>Potholes</figcaption>
+        </figure>
+      </div>
+
+      <h2>Evo by Demo</h2>
+      <div class="video-row two-up">
+        <figure class="video-pair">
+          <div class="media-pair">
+            <video
+              src="videos/evo_by_demo/demo_1_ant_8dof/ant_8dof.mp4"
+              controls
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="metadata"
+            ></video>
+            <img
+              src="videos/evo_by_demo/demo_1_ant_8dof/ant_8dof.png"
+              alt="Predefined ant 8-DOF demo robot"
+            >
+          </div>
+          <figcaption>Predefined Demo</figcaption>
+        </figure>
+
+        <figure class="video-pair">
+          <div class="media-pair">
+            <video
+              src="videos/evo_by_demo/demo_1_ant_8dof/gen_60_epoch_300_robot_67_rank_5_disp_2.044_co_steering_run_1.mp4"
+              controls
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="metadata"
+            ></video>
+            <img
+              src="videos/evo_by_demo/demo_1_ant_8dof/gen_60_epoch_300_robot_67_rank_5_disp_2.044_co_steering_run_1.png"
+              alt="Evolved robot from evo by demo"
+            >
+          </div>
+          <figcaption>Evolved Robot</figcaption>
+        </figure>
+      </div>
+    </section>
 
     <section id="abstract">
       <h2>Abstract</h2>
